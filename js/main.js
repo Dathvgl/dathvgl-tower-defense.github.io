@@ -49,6 +49,18 @@ function AltClick(e) {
 function ControlClick (e) {
     let x = e.layerX;
     let y = e.layerY;
+    
+    if (MouseDown.State == "hold") {
+        if (e.button == 2) {
+            MouseDown.State = "";
+            MouseMove.ReturnBasic();
+            document.body.removeEventListener("keydown", AltClick, false);
+            canvas.removeEventListener("mousemove", PlaceTurret, false);
+
+            x = y = null;
+            return;
+        }
+    }
 
     if (Layout[1].IsTile(x, y)) {
         //Kiểm tra nhấp khu danh sách trụ
